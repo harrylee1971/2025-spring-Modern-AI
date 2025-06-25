@@ -15,7 +15,7 @@ torch.manual_seed(42)
 
 # 抓取 2330.TW 股價數據
 def fetch_0050_data(start_date, end_date):
-    ticker = "TSLA" 
+    ticker = "SPMO" 
     data = yf.download(ticker, start=start_date, end=end_date, interval="1d")
     if data.empty:
         raise ValueError("無法抓取 2330.TW 數據，請檢查網路或日期範圍")
@@ -68,7 +68,7 @@ class StockTradingEnv:
 
     def reset(self):
         self.current_step = 0
-        self.balance = 100000
+        self.balance = 4500
         self.shares = 0
         self.action_log = []
         self.hold_streak = 0
