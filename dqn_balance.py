@@ -15,7 +15,7 @@ torch.manual_seed(42)
 
 # Fetch stock data
 def fetch_0050_data(start_date, end_date):
-    ticker = "SPMO"
+    ticker = "NVDA"
     data = yf.download(ticker, start=start_date, end=end_date, interval="1d")
     if data.empty:
         raise ValueError("無法抓取資料")
@@ -124,7 +124,7 @@ class StockTradingEnv:
             self.action_log.append(f"Sell {sold_shares} shares at {current_price:.2f}")
             if trade_profit > 0:
                 reward += 2.0
-                reward += (trade_profit / (buy_price * sold_shares + 1e-6)) * 200
+                reward += (trade_profit / (buy_price * sold_shares + 1e-6)) * 3000
             else:
                 reward -= 0.3
 
@@ -136,12 +136,12 @@ class StockTradingEnv:
             else:
                 reward += 0.05
 
-        reward += (self.balance - 4500) / 100000
+        # reward += (self.balance - 4500) / 100000
 
         done = self.current_step >= self.max_steps
         if done:
             final_return = (self.balance - 4500) / 4500
-            reward += final_return * 300
+            reward += final_return * 5000
 
         info = {
             'date': current_date,

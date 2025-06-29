@@ -181,16 +181,16 @@ class DQN(nn.Module):
     def __init__(self, state_size, action_size):
         super().__init__()
         self.feature = nn.Sequential(
-            nn.Linear(state_size, 128),
+            nn.Linear(state_size, 256),
             nn.ReLU()
         )
         self.value = nn.Sequential(
-            nn.Linear(128, 64),
+            nn.Linear(256, 64),
             nn.ReLU(),
             nn.Linear(64, 1)
         )
         self.advantage = nn.Sequential(
-            nn.Linear(128, 64),
+            nn.Linear(256, 64),
             nn.ReLU(),
             nn.Linear(64, action_size)
         )
